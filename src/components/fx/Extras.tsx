@@ -109,12 +109,11 @@ export function GiantFooterName() {
       <p className="bg-gradient-to-b from-white/10 to-white/0 bg-clip-text whitespace-nowrap text-center text-[15vw] font-bold leading-[0.9] tracking-tighter text-transparent">
         TOWN MADE
       </p>
-      <motion.p
-        style={{ WebkitMaskImage: mask, maskImage: mask }}
-        className="absolute inset-0 bg-gradient-to-b from-white via-sky to-navy bg-clip-text whitespace-nowrap text-center text-[15vw] font-bold leading-[0.9] tracking-tighter text-transparent"
-      >
-        TOWN MADE
-      </motion.p>
+      <motion.div style={{ WebkitMaskImage: mask, maskImage: mask }} className="absolute inset-0">
+        <p className="bg-gradient-to-b from-white via-sky to-navy bg-clip-text whitespace-nowrap text-center text-[15vw] font-bold leading-[0.9] tracking-tighter text-transparent">
+          TOWN MADE
+        </p>
+      </motion.div>
     </div>
   );
 }

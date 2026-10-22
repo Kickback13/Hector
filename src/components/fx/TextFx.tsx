@@ -104,7 +104,7 @@ export function BlurReveal({
               className="inline-block"
               variants={{
                 hidden: { opacity: 0, filter: "blur(12px)", y: 10 },
-                visible: { opacity: 1, filter: "blur(0px)", y: 0, transition: { duration: 0.5 } },
+                visible: { opacity: 1, filter: "blur(0px)", y: 0, transition: { duration: 0.5 }, transitionEnd: { filter: "none", transform: "none" } },
               }}
             >
               {c}
@@ -119,23 +119,22 @@ export function BlurReveal({
 
 export function ShimmerText({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <motion.span
+    <span
       className={cn("inline-block", className)}
       style={{
         WebkitTextFillColor: "transparent",
-        background:
-          "currentColor linear-gradient(to right, currentColor 0%, rgba(255,255,255,0.95) 40%, rgba(255,255,255,0.95) 60%, currentColor 100%)",
+        backgroundImage:
+          "linear-gradient(to right, currentColor 0%, currentColor 35%, rgba(255,255,255,0.95) 50%, currentColor 65%, currentColor 100%)",
+        backgroundColor: "currentColor",
         WebkitBackgroundClip: "text",
         backgroundClip: "text",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "50% 200%",
+        backgroundSize: "300% 100%",
+        animation: "shimmer-sweep 3.6s linear infinite",
       }}
-      initial={{ backgroundPositionX: "250%" }}
-      animate={{ backgroundPositionX: ["-100%", "250%"] }}
-      transition={{ duration: 1.6, delay: 0.8, repeat: Infinity, repeatDelay: 2, ease: "linear" }}
     >
       {children}
-    </motion.span>
+      <style>{`@keyframes shimmer-sweep{0%{background-position:100% 0}60%,100%{background-position:0% 0}}`}</style>
+    </span>
   );
 }
 
@@ -152,10 +151,7 @@ export function SplitHeading({ text, className, gradient = true }: { text: strin
               initial={{ y: 80, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2 + wi * 0.1 + ci * 0.03, type: "spring", stiffness: 150, damping: 22 }}
-              className={cn(
-                "inline-block",
-                gradient && "bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent",
-              )}
+              className={cn("inline-block", gradient ? "text-white [text-shadow:0_2px_30px_rgba(34,166,217,0.25)]" : "text-white")}
             >
               {c}
             </motion.span>

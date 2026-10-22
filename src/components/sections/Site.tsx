@@ -202,12 +202,16 @@ export default function Site() {
                 <SplitHeading text="made" gradient />{" "}
                 <motion.span
                   initial={{ opacity: 0, scale: 0.8, filter: "blur(16px)" }}
-                  animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                  animate={{ opacity: 1, scale: 1, filter: "blur(0px)", transitionEnd: { filter: "none" } }}
                   transition={{ delay: 0.9, duration: 0.9 }}
-                  className="inline-block bg-gradient-to-r from-sky via-white to-sky bg-[length:200%_auto] bg-clip-text italic text-transparent text-glow"
-                  style={{ animation: "shine 6s linear infinite" }}
+                  className="inline-block [filter:drop-shadow(0_0_28px_rgba(34,166,217,0.55))]"
                 >
-                  clean.
+                  <span
+                    className="inline-block bg-gradient-to-r from-sky via-white to-sky bg-[length:200%_auto] bg-clip-text pr-[0.08em] italic text-transparent"
+                    style={{ animation: "shine 6s linear infinite" }}
+                  >
+                    clean.
+                  </span>
                 </motion.span>
               </span>
             </h1>
