@@ -28,7 +28,7 @@ export default function SprayCursor() {
     const dot = dotRef.current!;
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d")!;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
 
     const resize = () => {
       canvas.width = innerWidth * dpr;
