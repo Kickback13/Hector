@@ -27,7 +27,7 @@ import { GlowCard } from "@/components/fx/GlowCard";
 import { CircularGallery, ContainerScroll, GooeyMarquee, NumberTicker, ShineBorder, TestimonialsColumn, type Review } from "@/components/fx/Motion";
 import { InteractiveButton, LiquidMetalButton, MobileDock, TubelightNav } from "@/components/fx/Chrome";
 import OrbitalProcess, { type Step } from "@/components/fx/Orbit";
-import { BackgroundPaths, Faq, GiantFooterName } from "@/components/fx/Extras";
+import { Faq, GiantFooterName } from "@/components/fx/Extras";
 import QuoteForm from "@/components/sections/QuoteForm";
 import { LogoLockup } from "@/components/brand/Logo";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/utils";
@@ -187,7 +187,7 @@ export default function Site() {
           <div className="absolute inset-0 bg-gradient-to-b from-abyss/70 via-abyss/60 to-abyss" />
           <AuroraShader className="absolute inset-0 mix-blend-screen" />
 
-          <div className="relative z-10 mx-auto w-full max-w-7xl transform-gpu px-4 pb-24 pt-36 md:px-8">
+          <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-24 pt-36 md:px-8">
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
               <Eyebrow>
                 <ShimmerText className="text-sky">Locally owned · San Diego &amp; La Jolla</ShimmerText>
@@ -458,8 +458,8 @@ export default function Site() {
 
         {/* QUOTE */}
         <section id="quote" className="relative overflow-hidden py-24 md:py-32">
-          <BackgroundPaths className="opacity-40" />
-          <div className="relative z-10 mx-auto max-w-5xl transform-gpu px-4 md:px-8">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_30%,rgba(34,166,217,0.16),transparent_70%)]" />
+          <div className="relative z-10 mx-auto max-w-5xl px-4 md:px-8">
             <div className="text-center">
               <Eyebrow>Free quotes · Fast turnaround</Eyebrow>
               <VaporText words={["Ready to see it clean?", "Driveways.", "Siding.", "Decks.", "Storefronts.", "Clean."]} fontSize={84} className="mt-4" />
