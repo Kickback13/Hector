@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+/* Town Made Cleaning — brand tokens (from the original site) */
+:root {
+  --navy: #0c4a63;
+  --sky: #22a6d9;
+  --abyss: #04141d;
+  --deep: #062433;
+  --tide: #0a3a50;
+  --foam: #e9f7fd;
+  --mist: #f3f7f8;
+  --line: rgba(34, 166, 217, 0.18);
+  --muted: #8fb3c2;
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-sky: var(--sky);
+  --color-abyss: var(--abyss);
+  --color-deep: var(--deep);
+  --color-tide: var(--tide);
+  --color-foam: var(--foam);
+  --color-mist: var(--mist);
+  --color-muted: var(--muted);
+  --font-sans: "Jost Variable", "Jost", ui-sans-serif, system-ui, sans-serif;
+  --animate-marquee: marquee var(--duration, 40s) linear infinite;
+  --animate-marquee-vertical: marquee-vertical var(--duration, 40s) linear infinite;
+  --animate-shine: shine var(--duration, 14s) linear infinite;
+  --animate-accordion-down: accordion-down 0.3s ease-out;
+  --animate-accordion-up: accordion-up 0.3s ease-out;
+  --animate-float: float 6s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-100% - var(--gap, 1rem))); }
+}
+@keyframes marquee-vertical {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(-100% - var(--gap, 1rem))); }
+}
+@keyframes shine {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes drip {
+  0% { transform: translateY(-10%) scaleY(0.6); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(120%) scaleY(1); opacity: 0; }
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--abyss);
+}
+
+body {
+  background: var(--abyss);
+  color: #fff;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--sky);
+  color: var(--abyss);
+}
+
+/* Hide the system cursor only when the custom cursor is live (fine pointers) */
+@media (pointer: fine) {
+  html.has-fx-cursor,
+  html.has-fx-cursor * {
+    cursor: none !important;
+  }
+}
+
+.text-glow {
+  text-shadow: 0 0 24px rgba(34, 166, 217, 0.55), 0 0 64px rgba(34, 166, 217, 0.25);
+}
+
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Spotlight glow cards (adapted from 21st.dev @easemize/spotlight-card) */
+[data-glow]::before,
+[data-glow]::after {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  inset: calc(var(--border-size) * -1);
+  border: var(--border-size) solid transparent;
+  border-radius: calc(var(--radius) * 1px);
+  background-attachment: fixed;
+  background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
+  mask-clip: padding-box, border-box;
+  mask-composite: intersect;
+}
+[data-glow]::before {
+  background-image: radial-gradient(
+    calc(var(--spotlight-size) * 0.75) calc(var(--spotlight-size) * 0.75) at calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+    hsl(var(--hue, 197) 100% 55% / 1), transparent 100%
+  );
+  filter: brightness(2);
+}
+[data-glow]::after {
+  background-image: radial-gradient(
+    calc(var(--spotlight-size) * 0.5) calc(var(--spotlight-size) * 0.5) at calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+    hsl(0 100% 100% / 1), transparent 100%
+  );
+}
+[data-glow] [data-glow] {
+  position: absolute;
+  inset: 0;
+  will-change: filter;
+  opacity: 1;
+  border-radius: calc(var(--radius) * 1px);
+  filter: blur(calc(var(--border-size) * 10));
+  background: none;
+  pointer-events: none;
+  border: none;
+}
+[data-glow] > [data-glow]::before {
+  inset: -10px;
+  border-width: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
